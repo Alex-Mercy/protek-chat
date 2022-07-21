@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({userName}) => {
   const [isFirstuser, setisFirstser] = useState(true);
   
   const changeUser = () => {
     setisFirstser(!isFirstuser);
   }
 
-  console.log(isFirstuser);
+  // console.log(isFirstuser);
 
   return (
     <div className='navbar'>
-      <p className={isFirstuser && 'boldText'}>Client1</p>
+      <p className={isFirstuser && 'boldText'}>{userName}</p>
       <label className="checkbox-google" >
         <input type="checkbox" onClick={changeUser}/>
         <span className="checkbox-google-switch"></span>
