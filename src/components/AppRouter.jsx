@@ -6,20 +6,19 @@ import {privateRoutes, publicRoutes} from "../routes.js";
 const AppRouter = () => {
     const [userName, setUserName] = useState();
     const [isAuth, setisAuth] = useState(false);
-    const [avatar, setAvatar] = useState();
+    const [avatarUrl, setAvatarUrl] = useState();
 
 
-    const login = (value, file) => {
+    const login = (value, imageUrl) => {
         setUserName(value);
         setisAuth(true);
-        setAvatar(file)
+        setAvatarUrl(imageUrl)
     }
 
-    
     return isAuth ? (
 		<Routes>
 			{privateRoutes.map(({path, Component}) => (
-				<Route key={path} path={path} element={<Component userName={userName} avatar={avatar}/>} />
+				<Route key={path} path={path} element={<Component userName={userName} avatarUrl={avatarUrl}/>} />
 			))}
 			<Route path='*' element={<Navigate to={CHAT_ROUTE} replace />} />
 		</Routes>

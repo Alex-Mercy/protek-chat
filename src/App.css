@@ -55,6 +55,9 @@
 
 .boldText {
   font-weight: bold;
+  pointer-events: none;
+  cursor: none;
+
 }
 
 .logout {

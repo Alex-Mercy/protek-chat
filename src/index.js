@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'; 
 import firebase from 'firebase/compat/app';
+import { getStorage} from "firebase/storage";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
@@ -19,18 +20,20 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 export const Context = createContext(null);
 
 const firestore = firebase.firestore();
+const storage = getStorage(app);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Context.Provider value={{
     firebase,
-    firestore
+    firestore,
+    storage
   }}>
   <BrowserRouter>
     <App />
@@ -38,6 +41,3 @@ root.render(
   </Context.Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
