@@ -1,32 +1,44 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { chatSlice } from "../store/reducers/chatSlice";
 
-const Navbar = ({ userName, onChangeUser }) => {
-  const [isFirstuser, setisFirstser] = useState(true);
+const Navbar = ({ onChangeActiveUser }) => {
+  const dispatch = useDispatch();
+  const { userName, isMainUser } = useSelector((state) => state.chatSlice);
+  const { logout, setRoom, setActiveFriend, setIsmainUser, setActiveUser } =
+    chatSlice.actions;
 
   useEffect(() => {
-    if (isFirstuser) {
-      onChangeUser(userName, isFirstuser)
+    if (isMainUser) {
+      dispatch(setActiveUser(userName));
+      onChangeActiveUser(userName);
     } else {
-      onChangeUser('Иван Иванов', isFirstuser)
+      dispatch(setActiveUser("Иван Иванов"));
+      onChangeActiveUser("Иван Иванов");
     }
-  }, [isFirstuser])
+  }, [dispatch, userName, isMainUser, setRoom, setActiveFriend, setActiveUser]);
 
   const changeUser = () => {
-    setisFirstser(!isFirstuser);
-  }
+    dispatch(setIsmainUser(!isMainUser));
+  };
+
+  const handleClick = () => {
+    dispatch(logout());
+  };
 
   return (
-    <div className='navbar'>
-      <p className={isFirstuser && 'boldText'}>{userName}</p>
-      <label className="checkbox-google" >
+    <div className="navbar">
+      <p className={isMainUser && "boldText"}>{userName}</p>
+      <label className="checkbox-google">
         <input type="checkbox" onClick={changeUser} />
         <span className="checkbox-google-switch"></span>
       </label>
-      <p className={!isFirstuser && 'boldText'}>Иван Иванов</p>
-      <Link className='logout' to='login'>Выход</Link>
+      <p className={!isMainUser && "boldText"}>Иван Иванов</p>
+      <div onClick={handleClick} className="logout">
+        Выход
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
