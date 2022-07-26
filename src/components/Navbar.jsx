@@ -1,44 +1,43 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { chatSlice } from "../store/reducers/chatSlice";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { chatSlice } from '../store/reducers/chatSlice'
 
-const Navbar = ({ onChangeActiveUser }) => {
-  const dispatch = useDispatch();
-  const { userName, isMainUser } = useSelector((state) => state.chatSlice);
-  const { logout, setRoom, setActiveFriend, setIsmainUser, setActiveUser } =
-    chatSlice.actions;
+const Navbar = ({ onChangeActiveUser, friend }) => {
+  const dispatch = useDispatch()
+  const { userName, isMainUser } = useSelector((state) => state.chatSlice)
+  const { logout, setIsmainUser, setActiveUser } = chatSlice.actions
 
   useEffect(() => {
     if (isMainUser) {
-      dispatch(setActiveUser(userName));
-      onChangeActiveUser(userName);
+      dispatch(setActiveUser(userName))
+      onChangeActiveUser(userName)
     } else {
-      dispatch(setActiveUser("Иван Иванов"));
-      onChangeActiveUser("Иван Иванов");
+      dispatch(setActiveUser(friend))
+      onChangeActiveUser(friend)
     }
-  }, [dispatch, userName, isMainUser, setRoom, setActiveFriend, setActiveUser]);
+  }, [dispatch, isMainUser])
 
   const changeUser = () => {
-    dispatch(setIsmainUser(!isMainUser));
-  };
+    dispatch(setIsmainUser(!isMainUser))
+  }
 
   const handleClick = () => {
-    dispatch(logout());
-  };
+    dispatch(logout())
+  }
 
   return (
-    <div className="navbar">
-      <p className={isMainUser && "boldText"}>{userName}</p>
-      <label className="checkbox-google">
-        <input type="checkbox" onClick={changeUser} />
-        <span className="checkbox-google-switch"></span>
+    <div className='navbar'>
+      <p className={isMainUser && 'boldText'}>{userName}</p>
+      <label className='checkbox-google'>
+        <input type='checkbox' onClick={changeUser} />
+        <span className='checkbox-google-switch'></span>
       </label>
-      <p className={!isMainUser && "boldText"}>Иван Иванов</p>
-      <div onClick={handleClick} className="logout">
+      <p className={!isMainUser && 'boldText'}>{friend}</p>
+      <div onClick={handleClick} className='logout'>
         Выход
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
