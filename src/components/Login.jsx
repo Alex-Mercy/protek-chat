@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '..';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { chatSlice } from '../store/reducers/chatSlice';
 import userAvatar from '../assets/images/user.jpg';
+import Loader from './Loader';
 
 const Login = () => {
   const { storage } = useContext(Context);
+  const { isLoading } = useSelector((state) => state.chatSlice);
   const [userName, setUsername] = useState('');
   const [imageUpload, setImageUpload] = useState('');
   const [userNameDirty, setUserNameDirty] = useState(false);
@@ -15,7 +17,7 @@ const Login = () => {
   const [formValid, setFormValid] = useState(false);
 
   const dispatch = useDispatch();
-  const { login } = chatSlice.actions;
+  const { login, setIsLoading } = chatSlice.actions;
 
   const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
 
@@ -54,8 +56,10 @@ const Login = () => {
     if (!imageUpload) {
       dispatch(login({ userName, url: userAvatar }));
     } else {
+      dispatch(setIsLoading(true));
       uploadBytes(imageRef, imageUpload).then(() => {
         getDownloadURL(imageRef).then((url) => {
+          dispatch(setIsLoading(false));
           dispatch(login({ userName, url }));
         });
       });
@@ -88,6 +92,7 @@ const Login = () => {
         <button disabled={!formValid} type='submit' className='button'>
           <h3>Войти в чат</h3>
         </button>
+        {isLoading && <Loader />}
       </form>
     </div>
   );

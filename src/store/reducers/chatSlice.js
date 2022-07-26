@@ -1,16 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  isLoading: false,
   isAuth: false,
   isMainUser: true,
-  userName: "",
-  avatarUrl: "",
-  activeFriend: "",
-  room: "",
+  userName: '',
+  avatarUrl: '',
+  activeFriend: '',
+  room: '',
 };
 
 export const chatSlice = createSlice({
-  name: "chat",
+  name: 'chat',
   initialState,
   reducers: {
     login(state, action) {
@@ -19,6 +20,9 @@ export const chatSlice = createSlice({
       state.room = action.payload.userName;
       state.activeFriend = action.payload.userName;
       state.avatarUrl = action.payload.url;
+    },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
     },
     logout(state) {
       state.isAuth = false;
