@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/protek-chat/static/css/main.08bdc8bd.css",
+    "main.js": "/protek-chat/static/js/main.f97b54a7.js",
+    "static/media/user.jpg": "/protek-chat/static/media/user.f6abac37e2263010a02b.jpg",
+    "index.html": "/protek-chat/index.html",
+    "main.08bdc8bd.css.map": "/protek-chat/static/css/main.08bdc8bd.css.map",
+    "main.f97b54a7.js.map": "/protek-chat/static/js/main.f97b54a7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.08bdc8bd.css",
+    "static/js/main.f97b54a7.js"
+  ]
+}
