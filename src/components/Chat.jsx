@@ -40,7 +40,8 @@ const Chat = ({ friend }) => {
     setValue(e.target.value);
   };
 
-  const sendMessage = async () => {
+  const sendMessage = async (event) => {
+    event.preventDefault();
     firestore.collection(room).add({
       userName: activeUser,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -80,7 +81,7 @@ const Chat = ({ friend }) => {
                 </div>
               ))}
           </div>
-          <div className='textarea'>
+          <form className='textarea' onSubmit={sendMessage}>
             <input
               type='text'
               value={value}
@@ -95,7 +96,7 @@ const Chat = ({ friend }) => {
                 className='imageButton'
               />
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
