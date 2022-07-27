@@ -17,13 +17,18 @@ ____
 ```
 
 ## 3. Технологии:
+* ```React``` - основная библиотека
 * ```Redux-toolkit``` - стейт менеджер
 * ```React-Router-Dom``` для роутинга
 *  ```uuid``` для создания уникальных id
 *  ```firebase``` в качестве базы данных
 
+## 4. Ссылка на готовое приложение:
+https://alex-mercy.github.io/protek-chat/
+
 ## 4. Демонстрация работы приложения:
-
-
 ![2022-07-27_18-46-01](https://user-images.githubusercontent.com/80210155/181295532-86dcf21d-768e-47ad-b3e4-3ccae7a10d31.png)
+
 ![2022-07-27_18-46-17](https://user-images.githubusercontent.com/80210155/181295500-e9c85961-dcd4-46d3-8ced-34d26f38f34e.png)
+
+![2022-07-27_21-33-06](https://user-images.githubusercontent.com/80210155/181346905-88c73555-6cad-498a-aadf-4ec49df26ef0.png)
